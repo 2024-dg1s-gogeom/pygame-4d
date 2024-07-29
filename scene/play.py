@@ -1,4 +1,7 @@
 import pygame
+from pygame.locals import *
+from maze.maze import Maze
+import render
 
 class Play():
     def __init__(self):
@@ -10,5 +13,4 @@ class Play():
         return 'play'
 
     def render(self, _, display_surf):
-        # _display_surf.blit(self.title, (400, 300))
         pass

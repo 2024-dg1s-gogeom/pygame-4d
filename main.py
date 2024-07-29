@@ -16,41 +16,31 @@ class App:
         self._display_surf = pygame.display.set_mode(self.size, pygame.HWSURFACE | pygame.DOUBLEBUF)
         self._running = True
         self.maze = Maze(100)
-        self.render = render.front_render       # self.scene.font = pygame.font.Font(None, 36)
-        self.scene = 0 
+        self.render = render.front_render 
  
     def on_event(self, event):
         if event.type == pygame.QUIT:
             self._running = False
-        # Goto play at front scene if key ENTER is pressed
-        if event.type == pygame.K_0:
-            self.scene = 1
-            self.render = render.play_render
-        # # Goto front at play scene if key ESC is pressed
-        # if self.scene.name() == 'play' and event.type == pygame.KSCAN_ESCAPE:
-        #     self.scene = scene['front']
-        # # Goto front at finish scene if key ENTER is pressed
-        # if self.scene.name() == 'finish' and event.type == pygame.KSCAN_KP_ENTER:
-        #     self.scene = scene['front']
 
     def on_loop(self):
-        pass
         keys = pygame.key.get_pressed()
-        # modifier = 1
-        # if keys[pygame.K_LSHIFT] or keys[pygame.K_RSHIFT]:# Shift key is pressed
-        #     modifier = -1
-        if keys[pygame.K_q]:
+        if self.render == render.front_render and keys[pygame.KSCAN_KP_ENTER]:
             self.render = render.play_render
-        # if keys[pygame.K_w]:
-        #     self.maze.Update([0, modifier*1, 0, 0])
-        # if keys[pygame.K_e]:
-        #     self.maze.Update([0, 0, modifier*1, 0])
-        # if keys[pygame.K_r]:
-        #     self.maze.Update([0, 0, 0, modifier*1])
+        modifier = 1
+        if keys[pygame.K_LSHIFT] or keys[pygame.K_RSHIFT]:# Shift key is pressed
+            modifier = -1
+        if keys[pygame.K_q]:
+            self.maze.Update([modifier*1, 0, 0, 0])
+        if keys[pygame.K_w]:
+            self.maze.Update([0, modifier*1, 0, 0])
+        if keys[pygame.K_e]:
+            self.maze.Update([0, 0, modifier*1, 0])
+        if keys[pygame.K_r]:
+            self.maze.Update([0, 0, 0, modifier*1])
 
     def on_render(self):
         # pass
-        self.render(self.font, self._display_surf)
+        self.render(self.font, self.maze, self._display_surf)
 
     def on_cleanup(self):
         pygame.quit()

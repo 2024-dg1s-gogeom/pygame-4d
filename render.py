@@ -13,4 +13,3 @@ def play_render(font, maze, display_surf):
     for i in range(4):
         show_map(i)
     pygame.display.flip()
-#
