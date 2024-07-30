@@ -9,38 +9,37 @@ class App:
         pygame.font.init()
         self._running = True
         self._display_surf = None
-        self.size = self.weight, self.height = 800, 600
+        self.size = self.width, self.height = 800, 600
         self.font = pygame.font.Font(pygame.font.get_default_font(), 36)
  
     def on_init(self):
         self._display_surf = pygame.display.set_mode(self.size, pygame.HWSURFACE | pygame.DOUBLEBUF)
         self._running = True
         self.maze = Maze(100)
-        self.render = render.front_render 
  
     def on_event(self, event):
         if event.type == pygame.QUIT:
             self._running = False
 
     def on_loop(self):
+        self.render = render.front_render 
         keys = pygame.key.get_pressed()
-        if self.render == render.front_render and keys[pygame.KSCAN_KP_ENTER]:
+        if self.render == render.front_render and keys[pygame.K_SPACE]:
             self.render = render.play_render
         self.playerpos = [0, 0, 0, 0]
         modifier = 1
         if keys[pygame.K_LSHIFT] or keys[pygame.K_RSHIFT]:    # SHIFT 누를 때 마다 앞 뒤 이동 방향 바뀜
             modifier *= -1
-        if keys[pygame.K_q]:
-            self.playerpos[0] += modifier * 1
-        if keys[pygame.K_w]:
-            self.playerpos[1] += modifier * 1
-        if keys[pygame.K_e]:
-            self.playerpos[2] += modifier * 1
-        if keys[pygame.K_r]:
-            self.playerpos[3] += modifier *1
+            if keys[pygame.K_q]:
+                self.playerpos[0] += modifier * 1
+            if keys[pygame.K_w]:
+                self.playerpos[1] += modifier * 1
+            if keys[pygame.K_e]:
+                self.playerpos[2] += modifier * 1
+            if keys[pygame.K_r]:
+                self.playerpos[3] += modifier *1
 
     def on_render(self):
-        # pass
         self.render(self.font, self.maze, self._display_surf)
 
     def on_cleanup(self):
