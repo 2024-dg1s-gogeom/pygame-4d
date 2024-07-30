@@ -31,6 +31,7 @@ class App:
             if event.type == pygame.KEYDOWN and self.render == render.front_render:  # 키가 눌렸을 때
                 if event.key == pygame.K_SPACE:  # 스페이스바가 눌렸는지 확인
                     self.k += 1
+            # play 끝나고 finish로 갈 때 다시 self.k = 0 으로 해야 함.
         if self.k == 0:
             self.render = render.front_render
         else:
