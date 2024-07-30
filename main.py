@@ -1,6 +1,7 @@
 import pygame
 from pygame.locals import *
 from maze.maze import Maze
+from maze.maze import mazePath
 import render
 
 class App:
@@ -38,19 +39,26 @@ class App:
             self.render = render.play_render
         
         ##### 플레이어 이동 알고리즘 #####
-        self.playerpos = [0, 0, 0, 0]
+        self.playerpos = [0, 0, 0, 0] # 실제 플레이어의 좌표
+        self.playerposSaved = [0, 0, 0, 0] # 이 곳으로 이동했다고 가정했을 때 플레이어의 좌표
         modifier = 1
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LSHIFT] or keys[pygame.K_RSHIFT]:    # SHIFT 누를 때 마다 앞 뒤 이동 방향 바뀜
             modifier *= -1
             if keys[pygame.K_q]:
-                self.playerpos[0] += modifier * 1
-            if keys[pygame.K_w]:
-                self.playerpos[1] += modifier * 1
+                self.playerposSaved[0] += modifier * 1
+            if keys[pygame.K_w]: 
+                self.playerposSaved[1] += modifier * 1
             if keys[pygame.K_e]:
-                self.playerpos[2] += modifier * 1
+                self.playerposSaved[2] += modifier * 1
             if keys[pygame.K_r]:
-                self.playerpos[3] += modifier * 1
+                self.playerposSaved[3] += modifier * 1
+
+        ##### 벽(못가는곳) 생성 알고리즘 #####
+        if mazePath[self.playerpos[0]][self.playerpos[1]][self.playerpos[2]][self.playerpos[3]] == 0:
+            self.playerposSaved = self.playerpos # 이동했을 때 막혀있다면 self.playerpos를 그대로 두고, 업데이트된 playerposSaved는 업데이트되기 전 좌표(self.playepos)로 변환
+        else:
+            self.playerpos = self.playerposSaved # 이동했을 때 막혀있지 않다면 saved된 정보를 실제 값에 업로드함으로써 이동
 
     def on_render(self):
         self.render(self.font, self.maze, self._display_surf)
