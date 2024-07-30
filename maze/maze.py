@@ -15,3 +15,7 @@ class Maze():
     
     def NewPath():
         pass
+
+    def Update(list):
+        charPos = [0,0,0,0]
+        charPos += list
