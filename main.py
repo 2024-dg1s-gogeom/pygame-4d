@@ -36,6 +36,8 @@ class App:
             self.render = render.front_render
         else:
             self.render = render.play_render
+        
+        ##### 플레이어 이동 알고리즘 #####
         self.playerpos = [0, 0, 0, 0]
         modifier = 1
         keys = pygame.key.get_pressed()
@@ -48,7 +50,10 @@ class App:
             if keys[pygame.K_e]:
                 self.playerpos[2] += modifier * 1
             if keys[pygame.K_r]:
-                self.playerpos[3] += modifier *1
+                self.playerpos[3] += modifier * 1
+        
+        ##### 막힌 길 생성 알고리즘 #####
+
 
     def on_render(self):
         self.render(self.font, self.maze, self._display_surf)
