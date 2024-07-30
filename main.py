@@ -28,16 +28,24 @@ class App:
             self.render = render.play_render
         self.playerpos = [0, 0, 0, 0]
         modifier = 1
-        if keys[pygame.K_LSHIFT] or keys[pygame.K_RSHIFT]:    # SHIFT 누를 때 마다 앞 뒤 이동 방향 바뀜
-            modifier *= -1
-        if keys[pygame.K_q]:
-            self.playerpos[0] += modifier * 1
-        if keys[pygame.K_w]:
-            self.playerpos[1] += modifier * 1
-        if keys[pygame.K_e]:
-            self.playerpos[2] += modifier * 1
-        if keys[pygame.K_r]:
-            self.playerpos[3] += modifier *1
+        if keys[pygame.K_LSHIFT] or keys[pygame.K_RSHIFT]:    # SHIFT 누르고 q, w, e, r 누르면 뒤로
+            if keys[pygame.K_q]:
+                self.playerpos[0] += modifier * -1
+            if keys[pygame.K_w]:
+                self.playerpos[1] += modifier * -1
+            if keys[pygame.K_e]:
+                self.playerpos[2] += modifier * -1
+            if keys[pygame.K_r]:
+                self.playerpos[3] += modifier * -1
+        else:
+            if keys[pygame.K_q]:
+                self.playerpos[0] += modifier * 1
+            if keys[pygame.K_w]:
+                self.playerpos[1] += modifier * 1
+            if keys[pygame.K_e]:
+                self.playerpos[2] += modifier * 1
+            if keys[pygame.K_r]:
+                self.playerpos[3] += modifier * 1
 
     def on_render(self):
         # pass
