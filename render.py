@@ -11,13 +11,8 @@ def front_render(font, maze, display_surf):
 def play_render(font, maze, display_surf):
     display_surf.fill((0, 0, 0))
     pygame.draw.line(display_surf, (255, 255, 255), (400,0), (400,600), 2)
-    pygame.draw.line(display_surf, (255, 255, 255), (0,300), (800,300), 2)
-    # half_width = 400
-    # half_height = 300
-    # display_surf.fill((0, 0, 0), rect=(0, 0, half_width, half_height))
-    # display_surf.fill((0, 0, 0), rect=(400, 300, half_width, half_height))  
-    for i in range(4):
-        show_map(i)
+    pygame.draw.line(display_surf, (255, 255, 255), (0,300), (800,300), 2)  
+    show_map(display_surf)
     pygame.display.flip()
 
 def finish_render(font, maze, display_surf):
