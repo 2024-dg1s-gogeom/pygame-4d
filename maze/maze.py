@@ -30,6 +30,4 @@ class Maze:
         path[0][0][0][0] = 2
         path[n-1][n-1][n-1][n-1] = 3
 
-        print(path)
-
 
