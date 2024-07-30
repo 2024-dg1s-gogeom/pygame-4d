@@ -51,9 +51,6 @@ class App:
                 self.playerpos[2] += modifier * 1
             if keys[pygame.K_r]:
                 self.playerpos[3] += modifier * 1
-        
-        ##### 막힌 길 생성 알고리즘 #####
-
 
     def on_render(self):
         self.render(self.font, self.maze, self._display_surf)
