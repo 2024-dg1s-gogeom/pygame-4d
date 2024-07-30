@@ -26,17 +26,18 @@ class App:
         keys = pygame.key.get_pressed()
         if self.render == render.front_render and keys[pygame.KSCAN_KP_ENTER]:
             self.render = render.play_render
+        self.playerpos = [0, 0, 0, 0]
         modifier = 1
-        if keys[pygame.K_LSHIFT] or keys[pygame.K_RSHIFT]:# Shift key is pressed
-            modifier = -1
+        if keys[pygame.K_LSHIFT] or keys[pygame.K_RSHIFT]:    # SHIFT 누를 때 마다 앞 뒤 이동 방향 바뀜
+            modifier *= -1
         if keys[pygame.K_q]:
-            self.maze.Update([modifier*1, 0, 0, 0])
+            self.playerpos[0] += modifier * 1
         if keys[pygame.K_w]:
-            self.maze.Update([0, modifier*1, 0, 0])
+            self.playerpos[1] += modifier * 1
         if keys[pygame.K_e]:
-            self.maze.Update([0, 0, modifier*1, 0])
+            self.playerpos[2] += modifier * 1
         if keys[pygame.K_r]:
-            self.maze.Update([0, 0, 0, modifier*1])
+            self.playerpos[3] += modifier *1
 
     def on_render(self):
         # pass

@@ -16,3 +16,4 @@ class Maze():
     
     def NewPath():
         pass
+ 
