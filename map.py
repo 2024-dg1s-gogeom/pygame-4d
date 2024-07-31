@@ -12,6 +12,9 @@ def show_map(display_surf):
         #Background cell
         pygame.draw.rect(display_surf, black, (a-200, b-150, 400, 300))
 
+         #Frame
+        pygame.draw.rect(display_surf, white, (a-162, b-102, 324, 204))
+        
         #cross line
         pygame.draw.line(display_surf, white, (400,0), (400,600), 2)
         pygame.draw.line(display_surf, white, (0,300), (800,300), 2)
