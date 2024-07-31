@@ -5,7 +5,7 @@ import render
 
 def show_map(display_surf):
     drawList = [[200,150], [600,150], [200,450], [600,450]]
-    gray = ((200, 200, 200))
+    gray = ((200, 0, 0))
     black= ((0, 0, 0))
     for a,b in drawList:
         #Frame rectangle
@@ -15,18 +15,10 @@ def show_map(display_surf):
         pygame.draw.rect(display_surf, black, (a-120, b-60, 240, 120))
 
         #side polygon
-        pygame.draw.polygon(display_surf, gray, [a+120, b+60], [a+120, b+100], [a+160, b+100])
-        pygame.draw.polygon(display_surf, gray, [a+120, b-60], [a+120, b-100], [a+160, b-100])
-        pygame.draw.polygon(display_surf, gray, [a-120, b+60], [a-120, b+100], [a-160, b+100])
-        pygame.draw.polygon(display_surf, gray, [a-120, b-60], [a-120, b-100], [a-160, b-100])
-        
-        #side rectangle
-        rect_ud=[[a-120, b-100], [a+120, b+60]]
-        for x,y in rect_ud:
-            pygame.draw.rect(display_surf, gray, (x, y, 240, 40))
-        rect_rl=[[a-160, b-60], [a+120, b-60]]
-        for x,y in rect_rl:
-            pygame.draw.rect(display_surf, gray, (x, y, 40, 120))
+        pygame.draw.polygon(display_surf, gray, [a+120, b+60], [a+160, b+100], [a-120, b+60], [a-160, b+100])
+        pygame.draw.polygon(display_surf, gray, [a+120, b-60], [a+160, b-100], [a-120, b-60], [a-160, b-100])
+        pygame.draw.polygon(display_surf, gray, [a+120, b+60], [a+160, b+100], [a+120, b-60], [a+160, b-100])
+        pygame.draw.polygon(display_surf, gray, [a-120, b+60], [a-160, b+100], [a-120, b-60], [a-160, b-100])
         
         #side line
         pygame.draw.line(display_surf, black, [a+120, b+60], [a+160, b+100], 2)
