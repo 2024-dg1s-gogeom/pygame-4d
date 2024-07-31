@@ -20,6 +20,14 @@ def show_map(display_surf):
         pygame.draw.polygon(display_surf, gray, [a-120, b+60], [a-120, b+100], [a-160, b+100])
         pygame.draw.polygon(display_surf, gray, [a-120, b-60], [a-120, b-100], [a-160, b-100])
         
+        #side rectangle
+        rect_ud=[[a-120, b-100], [a+120, b+60]]
+        for x,y in rect_ud:
+            pygame.draw.rect(display_surf, gray, (x, y, 240, 40))
+        rect_rl=[[a-160, b-60], [a+120, b-60]]
+        for x,y in rect_rl:
+            pygame.draw.rect(display_surf, gray, (x, y, 40, 120))
+        
         #side line
         pygame.draw.line(display_surf, black, [a+120, b+60], [a+160, b+100], 2)
         pygame.draw.line(display_surf, black, [a+120, b-60], [a+160, b-100], 2)
