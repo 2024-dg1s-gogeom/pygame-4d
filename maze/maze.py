@@ -3,7 +3,7 @@ import pygame
 
 class Maze:
     ##### 맵 시작 알고리즘 #####
-    global tesseractSize; tesseractSize = int(input("Enter the size of Tesseract(size of thes side)"))
+    global tesseractSize; tesseractSize = 20
     global mazePath; mazePath = [[[[0 for x in range(tesseractSize)] for y in range(tesseractSize)] for z in range(tesseractSize)] for w in range(tesseractSize)] 
     # 0: 막힌 길, 1: 뚫린 길, 2: 시작점, 3: 도착점
 
@@ -30,6 +30,7 @@ class Maze:
         for w in range(tesseractSize):
             mazePath[tesseractSize-1][tesseractSize-1][tesseractSize-1][w] = 1
 
+    ### 시작지점, 도착지점 결정 ###
         mazePath[0][0][0][0] = 2
         mazePath[tesseractSize-1][tesseractSize-1][tesseractSize-1][tesseractSize-1] = 3
 
