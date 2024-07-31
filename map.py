@@ -2,7 +2,6 @@ import pygame
 from pygame.locals import *
 from maze.maze import Maze
 import render
-
 def show_map(display_surf):
     drawList = [[200,150], [600,150], [200,450], [600,450]]
     gray = (200, 200, 200)
@@ -12,7 +11,7 @@ def show_map(display_surf):
         #Background cell
         pygame.draw.rect(display_surf, black, (a-200, b-150, 400, 300))
 
-         #Frame
+        #Frame
         pygame.draw.rect(display_surf, white, (a-162, b-102, 324, 204))
         
         #cross line
@@ -36,3 +35,14 @@ def show_map(display_surf):
 
         #Cetral rectangle
         pygame.draw.rect(display_surf, black, (a-118, b-58, 236, 116))
+
+        #Coordinate
+    text_List=[["XP", (200,150)], ["YP", (600, 150)], ["ZP", (200, 450)], ["WP", (600, 450)]]
+    for C, X in text_List:
+        font=pygame.font.Font(None, 40)
+        text=font.render(C, True, white)
+        display_surf.blit(text, X)
+    pygame.display.flip()
+
+        
+    
