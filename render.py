@@ -5,7 +5,7 @@ from map import show_map
 def front_render(font, maze, display_surf):
     display_surf.fill((0, 0, 0))
     title = font.render("Tap SPACE BAR to Start", True, (255, 255, 255))
-    display_surf.blit(title, (190, 272))
+    display_surf.blit(title, (210, 272))
     pygame.display.flip()
 
 def play_render(font, maze, display_surf):
