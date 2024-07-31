@@ -5,18 +5,18 @@ import render
 
 def show_map(display_surf):
     drawList = [[200,150], [600,150], [200,450], [600,450]]
-    white = ((255, 255, 255))
+    gray = ((120, 120, 120))
     for a,b in drawList:
         #Frame rectangle
-        pygame.draw.rect(display_surf, white, (a-140, b-100, 280, 100))
+        pygame.draw.rect(display_surf, gray, (a-140, b-100, 280, 200))
         
         #Central rectangle
-        pygame.draw.rect(display_surf, white, (a-70, b-40, 140, 80))
+        pygame.draw.rect(display_surf, gray, (a-70, b-40, 140, 80))
 
         #side line
-        pygame.draw.line(display_surf, white, [a+70, b+40], [a+140, b+100], 2)
-        pygame.draw.line(display_surf, white, [a+70, b-40], [a+140, b-100], 2)
-        pygame.draw.line(display_surf, white, [a-70, b+40], [a-140, b+100], 2)
-        pygame.draw.line(display_surf, white, [a-70, b-40], [a-140, b-100], 2)
+        pygame.draw.line(display_surf, gray, [a+70, b+40], [a+140, b+100], 2)
+        pygame.draw.line(display_surf, gray, [a+70, b-40], [a+140, b-100], 2)
+        pygame.draw.line(display_surf, gray, [a-70, b+40], [a-140, b+100], 2)
+        pygame.draw.line(display_surf, gray, [a-70, b-40], [a-140, b-100], 2)
         
     
