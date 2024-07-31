@@ -14,6 +14,12 @@ def show_map(display_surf):
         #Central rectangle
         pygame.draw.rect(display_surf, black, (a-120, b-60, 240, 120))
 
+        #side polygon
+        pygame.draw.polygon(display_surf, gray, [a+120, b+60], [a+120, b+100], [a+160, b+100])
+        pygame.draw.polygon(display_surf, gray, [a+120, b-60], [a+120, b-100], [a+160, b-100])
+        pygame.draw.polygon(display_surf, gray, [a-120, b+60], [a-120, b+100], [a-160, b+100])
+        pygame.draw.polygon(display_surf, gray, [a-120, b-60], [a-120, b-100], [a-160, b-100])
+        
         #side line
         pygame.draw.line(display_surf, black, [a+120, b+60], [a+160, b+100], 2)
         pygame.draw.line(display_surf, black, [a+120, b-60], [a+160, b-100], 2)
