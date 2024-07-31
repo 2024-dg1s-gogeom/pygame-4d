@@ -60,6 +60,14 @@ class App:
         else:
             self.playerpos = self.playerposSaved # 이동했을 때 막혀있지 않다면 saved된 정보를 실제 값에 업로드함으로써 이동
 
+        ##### 맵 탈출 방지 알고리즘 #####
+        if self.playerpos[0]<0 or self.playerpos[0]>19 or self.playerpos[1]<0 or self.playerpos[1]>19 or self.playerpos[2]<0 or self.playerpos[2]>19 or self.playerpos[3]<0 or self.playerpos[3]>19:
+            self.playerposSaved = self.playerpos # 이동했을 때 막혀있다면 self.playerpos를 그대로 두고, 업데이트된 playerposSaved는 업데이트되기 전 좌표(self.playepos)로 변환
+        else:
+            self.playerpos = self.playerposSaved # 이동했을 때 막혀있지 않다면 saved된 정보를 실제 값에 업로드함으로써 이동
+
+        ##### 벽 그거 (map.py에 옮길거) #####
+
     def on_render(self):
         self.render(self.font, self.maze, self._display_surf)
 
