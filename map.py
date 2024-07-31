@@ -18,4 +18,5 @@ def show_map(display_surf):
         pygame.draw.line(display_surf, white, [a+70, b-40], [a+140, b-100], 2)
         pygame.draw.line(display_surf, white, [a-70, b+40], [a-140, b+100], 2)
         pygame.draw.line(display_surf, white, [a-70, b-40], [a-140, b-100], 2)
+        
     
