@@ -36,13 +36,21 @@ def show_map(display_surf):
         #Cetral rectangle
         pygame.draw.rect(display_surf, black, (a-118, b-58, 236, 116))
 
-        #Coordinate
-    text_List=[["XP", (200,150)], ["YP", (600, 150)], ["ZP", (200, 450)], ["WP", (600, 450)]]
-    for C, X in text_List:
-        font=pygame.font.Font(None, 40)
-        text=font.render(C, True, white)
-        display_surf.blit(text, X)
+    #Coordinate
+    i=0
+    center=[[200, 150, 0], [600, 150, 2], [200, 450, 4], [600, 450, 6]]
+    post_List=[[-10, -10], [-10, -130], [-150, -10], [130,-10], [-10, -90], [-10, 70]]
+    con=["XP", "XN", "YP", "YN", "ZP", "ZN", "WP", "WN"]
+    for p_x, p_y, in post_List:
+        i+=1
+        for ps_x, ps_y, N in center:
+            font=pygame.font.Font(None, 30)
+            text=font.render(con[N+i-1], True, white)
+            display_surf.blit(text, (ps_x+p_x, ps_y+p_y))
+        if i==2:
+            dis=(con[0], con[1])
+            for n in range(1,3):
+                con.remove(con[0])
+            con.extend(dis)
+            i=0
     pygame.display.flip()
-
-        
-    
