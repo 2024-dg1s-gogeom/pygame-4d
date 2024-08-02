@@ -49,8 +49,8 @@ def show_map(display_surf):
             display_surf.blit(text, (ps_x+p_x, ps_y+p_y))
         if i==2:
             dis=(con[0], con[1])
-            for n in range(1,3):
-                con.remove(con[0])
+            con.remove(con[0])
+            con.remove(con[0])
             con.extend(dis)
             i=0
     pygame.display.flip()
