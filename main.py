@@ -43,7 +43,7 @@ class App:
         self.playerposSaved = [0, 0, 0, 0] # 이 곳으로 이동했다고 가정했을 때 플레이어의 좌표
         modifier = 1
         keys = pygame.key.get_pressed()
-        if keys[pygame.K_LSHIFT] or keys[pygame.K_RSHIFT]:    # SHIFT 누를 때 마다 앞 뒤 이동 방향 바뀜
+        if keys[pygame.K_LSHIFT] or keys[pygame.K_RSHIFT]:    # SHIFT 누를 때 앞 뒤 이동 방향 바뀜
             modifier *= -1
             if keys[pygame.K_q]:
                 self.playerposSaved[0] += modifier * 1
@@ -55,16 +55,16 @@ class App:
                 self.playerposSaved[3] += modifier * 1
 
         ##### 벽(못가는곳) 생성 알고리즘 #####
-        if mazePath[self.playerpos[0]][self.playerpos[1]][self.playerpos[2]][self.playerpos[3]] == 0:
-            self.playerposSaved = self.playerpos # 이동했을 때 막혀있다면 self.playerpos를 그대로 두고, 업데이트된 playerposSaved는 업데이트되기 전 좌표(self.playepos)로 변환
+        if mazePath[self.playerposSaved[0]][self.playerposSaved[1]][self.playerposSaved[2]][self.playerposSaved[3]] == 0:
+            self.playerpos = self.playerposSaved
         else:
-            self.playerpos = self.playerposSaved # 이동했을 때 막혀있지 않다면 saved된 정보를 실제 값에 업로드함으로써 이동
+            self.playerposSaved = self.playerpos
 
         ##### 맵 탈출 방지 알고리즘 #####
-        if self.playerpos[0]<0 or self.playerpos[0]>19 or self.playerpos[1]<0 or self.playerpos[1]>19 or self.playerpos[2]<0 or self.playerpos[2]>19 or self.playerpos[3]<0 or self.playerpos[3]>19:
-            self.playerposSaved = self.playerpos # 이동했을 때 막혀있다면 self.playerpos를 그대로 두고, 업데이트된 playerposSaved는 업데이트되기 전 좌표(self.playepos)로 변환
+        if  self.playerposSaved[0]<0 or self.playerposSaved[0]>19 or self.playerposSaved[1]<0 or self.playerposSaved[1]>19 or self.playerposSaved[2]<0 or self.playerposSaved[2]>19 or self.playerposSaved[3]<0 or self.playerposSaved[3]>19:
+            self.playerpos = self.playerposSaved
         else:
-            self.playerpos = self.playerposSaved # 이동했을 때 막혀있지 않다면 saved된 정보를 실제 값에 업로드함으로써 이동
+            self.playerposSaved = self.playerpos 
 
         ##### 벽 그거 (map.py에 옮길거) #####
 

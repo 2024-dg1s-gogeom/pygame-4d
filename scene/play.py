@@ -10,8 +10,3 @@ class Play():
     def name():
         return 'play'
     
-    
-
-    
-    
-

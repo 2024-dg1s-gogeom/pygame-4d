@@ -59,8 +59,6 @@ class Maze:
         for w in range(14,20): # (19,19,19,14) -> (19,19,19,19)
             mazePath[19][19][19][w] = 1
         
-        
-
     ### 시작지점, 도착지점 결정 ###
         mazePath[0][0][0][0] = 2
         mazePath[tesseractSize-1][tesseractSize-1][tesseractSize-1][tesseractSize-1] = 3
