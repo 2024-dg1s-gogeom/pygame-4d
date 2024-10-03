@@ -2,6 +2,8 @@ import pygame
 from pygame.locals import *
 from maze.maze import Maze
 import render
+import main
+
 def show_map(display_surf):
     drawList = [[200,150], [600,150], [200,450], [600,450]]
     gray = (200, 200, 200)
@@ -40,8 +42,8 @@ def show_map(display_surf):
     pygame.draw.rect(display_surf, white, (310, 250, 180, 100))
     pygame.draw.rect(display_surf, black, (312, 252, 176, 96))
     font=pygame.font.Font(None, 40)
-    text=font.render("POSTION", True, white)
-    display_surf.blit(text, (335, 255))
+    posTitle=font.render("POSTION", True, white)
+    display_surf.blit(posTitle, (335, 255))
 
     #Coordinate
     i=-1

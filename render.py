@@ -18,8 +18,8 @@ def play_render(font, maze, display_surf):
 def finish_render(font, maze, display_surf):
     display_surf.fill((0, 0, 0))
     ending = font.render("You WON !!", True, (255, 255, 255))
-    display_surf.blit(ending, (370, 232))
-    goingback = font.render("Tap ESC to return to start")
-    display_surf.blit(goingback, (345, 282))
-
+    display_surf.blit(ending, (210, 232))
+    goingback = font.render("Tap ESC to return to start", True, (255, 255, 255))
+    display_surf.blit(goingback, (210, 282))
+    pygame.display.flip()
 
