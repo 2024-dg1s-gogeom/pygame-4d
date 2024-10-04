@@ -19,8 +19,7 @@ class App:
         self._running = True
         self.maze = Maze()
         self.k = 0
-        self.playerpos = [0, 0, 0, 0] # 실제 플레이어의 좌표
-        self.playerposSaved = [0, 0, 0, 0] # 이 곳으로 이동했다고 가정했을 때 플레이어의 좌표
+        self.playerpos = [0, 0, 0, 0]
         self.modifier = 1
 
     def on_event(self, event):
@@ -41,26 +40,36 @@ class App:
                 if event.key == pygame.K_LSHIFT or event.key == pygame.K_RSHIFT:    # SHIFT 누를 때 앞 뒤 이동 방향 바뀜
                     self.modifier *= -1
                 if event.key == pygame.K_q:
-                    self.playerposSaved[0] += self.modifier * 1
+                    self.playerpos[0] += self.modifier * 1 # modifier에 1 곱함 -> 앞으로 전진
                 if event.key == pygame.K_w: 
-                    self.playerposSaved[1] += self.modifier * 1
+                    self.playerpos[1] += self.modifier * 1
                 if event.key == pygame.K_e:
-                    self.playerposSaved[2] += self.modifier * 1
+                    self.playerpos[2] += self.modifier * 1
                 if event.key == pygame.K_r:
-                    self.playerposSaved[3] += self.modifier * 1
+                    self.playerpos[3] += self.modifier * 1
 
-            ##### 벽(못가는곳) 생성 알고리즘 #####
-            if mazePath[self.playerposSaved[0]][self.playerposSaved[1]][self.playerposSaved[2]][self.playerposSaved[3]] == 0:
-                self.playerposSaved = self.playerpos
+            if  ( 
+                    mazePath[self.playerpos[0]][self.playerpos[1]][self.playerpos[2]][self.playerpos[3]] == 0 or # 벽 생성
+                    self.playerpos[0]<0 or self.playerpos[0]>19 or # 맵 못 빠져나가도록
+                    self.playerpos[1]<0 or self.playerpos[1]>19 or 
+                    self.playerpos[2]<0 or self.playerpos[2]>19 or 
+                    self.playerpos[3]<0 or self.playerpos[3]>19
+                ):
 
-            ##### 맵 탈출 방지 #####
-            elif self.playerposSaved[0]<0 or self.playerposSaved[0]>19 or self.playerposSaved[1]<0 or self.playerposSaved[1]>19 or self.playerposSaved[2]<0 or self.playerposSaved[2]>19 or self.playerposSaved[3]<0 or self.playerposSaved[3]>19:
-                self.playerposSaved = self.playerpos
+                if event.type == pygame.KEYDOWN and self.k == 1: 
+                    if event.key == pygame.K_LSHIFT or event.key == pygame.K_RSHIFT:    
+                        self.modifier *= -1
+                    if event.key == pygame.K_q:
+                        self.playerpos[0] += self.modifier * -1 # modifier에 -1 곱함 -> 뒤로 돌아오도록
+                    if event.key == pygame.K_w: 
+                        self.playerpos[1] += self.modifier * -1
+                    if event.key == pygame.K_e:
+                        self.playerpos[2] += self.modifier * -1
+                    if event.key == pygame.K_r:
+                        self.playerpos[3] += self.modifier * -1
 
-            else:
-                self.playerpos = self.playerposSaved
-
-            print(f"{self.playerpos}, {self.playerposSaved}, {mazePath[self.playerposSaved[0]][self.playerposSaved[1]][self.playerposSaved[2]][self.playerposSaved[3]]}")
+            print(f"{self.playerpos},{mazePath[self.playerpos[0]][self.playerpos[1]][self.playerpos[2]][self.playerpos[3]]}")
+            # 이거는 플레이어 좌표 확인용. 나중에 가운데에 플레이어 좌표 띄우고 난 후에는 지워야함
 
             ### 게임 끝 ###
             if mazePath[self.playerpos[0]][self.playerpos[1]][self.playerpos[2]][self.playerpos[3]] == 3:
@@ -84,6 +93,7 @@ class App:
         while self._running:
             self.on_render()
             self.on_loop()
+
         self.on_cleanup()
 
 if __name__ == "__main__":
