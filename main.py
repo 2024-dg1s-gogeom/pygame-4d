@@ -2,6 +2,7 @@ import pygame
 from pygame.locals import *
 from maze.maze import Maze
 from maze.maze import mazePath
+from maze.maze import startPos
 import render
 
 class App:
@@ -13,13 +14,12 @@ class App:
         self.size = self.width, self.height = 800, 600
         self.font = pygame.font.Font(pygame.font.get_default_font(), 36)
 
-
     def on_init(self):
         self._display_surf = pygame.display.set_mode(self.size, pygame.HWSURFACE | pygame.DOUBLEBUF)
         self._running = True
         self.maze = Maze()
         self.k = 0
-        self.playerpos = [0, 0, 0, 0]
+        self.playerpos = [startPos, 0, 0, 0]
         self.modifier = 1
 
     def on_event(self, event):
@@ -99,4 +99,6 @@ class App:
 if __name__ == "__main__":
     theApp = App()
     theApp.on_execute()
+
+
 
