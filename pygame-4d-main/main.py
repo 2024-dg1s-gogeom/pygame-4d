@@ -44,6 +44,7 @@ class App:
                     self.modifier *= -1
                 if event.key == pygame.K_q:
                     self.playerpos[0] += self.modifier * 1 # modifier에 1 곱함 -> 앞으로 전진
+                    
                 if event.key == pygame.K_w: 
                     self.playerpos[1] += self.modifier * 1
                 if event.key == pygame.K_e:
@@ -101,6 +102,5 @@ class App:
 if __name__ == "__main__":
     theApp = App()
     theApp.on_execute()
-
 
 
