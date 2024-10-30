@@ -4,7 +4,7 @@ from maze.maze import Maze
 from maze.maze import mazePath, modeOfMaze
 from maze.maze import startRmazeX, startRmazeY, startRmazeZ, startRmazeW
 import render
-
+from map import vis
 class App:
     def __init__(self):
         pygame.init()
@@ -37,6 +37,7 @@ class App:
             if event.type == pygame.KEYDOWN and self.k == 0:  # 키가 눌렸을 때
                 if event.key == pygame.K_SPACE:  # 스페이스바가 눌렸는지 확인
                     self.k = 1
+            px, py, pz, pw=0
 
             ### 게임 진행 ###
             if event.type == pygame.KEYDOWN and self.k == 1:
@@ -44,13 +45,16 @@ class App:
                     self.modifier *= -1
                 if event.key == pygame.K_q:
                     self.playerpos[0] += self.modifier * 1 # modifier에 1 곱함 -> 앞으로 전진
-                    
+                    px=px+1
                 if event.key == pygame.K_w: 
                     self.playerpos[1] += self.modifier * 1
+                    py=py+1
                 if event.key == pygame.K_e:
                     self.playerpos[2] += self.modifier * 1
+                    pz=pz+1
                 if event.key == pygame.K_r:
                     self.playerpos[3] += self.modifier * 1
+                    pw=pw+1
 
             if  ( 
                     mazePath[self.playerpos[0]][self.playerpos[1]][self.playerpos[2]][self.playerpos[3]] == 0 or # 벽 생성
@@ -65,12 +69,16 @@ class App:
                         self.modifier *= -1
                     if event.key == pygame.K_q:
                         self.playerpos[0] += self.modifier * -1 # modifier에 -1 곱함 -> 뒤로 돌아오도록
+                        px=px-1
                     if event.key == pygame.K_w: 
                         self.playerpos[1] += self.modifier * -1
+                        py=py-1
                     if event.key == pygame.K_e:
                         self.playerpos[2] += self.modifier * -1
+                        pz=pz-1
                     if event.key == pygame.K_r:
                         self.playerpos[3] += self.modifier * -1
+                        pw=pw-1
 
             print(f"{self.playerpos},{mazePath[self.playerpos[0]][self.playerpos[1]][self.playerpos[2]][self.playerpos[3]]}")
             # 이거는 플레이어 좌표 확인용. 나중에 가운데에 플레이어 좌표 띄우고 난 후에는 지워야함
