@@ -70,11 +70,13 @@ class App:
                         self.playerpos[2] += self.modifier * -1
                     if event.key == pygame.K_r:
                         self.playerpos[3] += self.modifier * -1
-            def show_map(display_surf):
-                drawList = [[200, 150, App.playerpos[0]+1, App.playerpos[1], App.playerpos[2], App.playerpos[3], App.playerpos[0]-1, App.playerpos[1], App.playerpos[2], App.playerpos[3], 1], [600, 150, App.playerpos[0], App.playerpos[1]+1, App.playerpos[2], App.playerpos[3], App.playerpos[0], App.playerpos[1]-1, App.playerpos[2], App.playerpos[3], 2]
-                            ,[200, 450, App.playerpos[0], App.playerpos[1], App.playerpos[2]+1, App.playerpos[3], App.playerpos[0], App.playerpos[1], App.playerpos[2]-1, App.playerpos[3], 3], [600, 450, App.playerpos[0], App.playerpos[1], App.playerpos[2], App.playerpos[3]+1, App.playerpos[1], App.playerpos[2], App.playerpos[3]-1, 4]]
+            def show_map(display_surf, self):
+                px = self.playerpos[0]
+                py = self.playerpos[1]
+                pz = self.playerpos[2]
+                pw = self.playerpos[3]
+                drawList = [[200, 150, px+1, py, pz, pw, px-1, py, pz, pw, 1], [600, 150, px, py+1, pz, pw, px, py-1, pz, pw, 2], [200, 450, px, py, pz+1, pw, px, py, pz-1, pw, 3], [600, 450, px, py, pz, pw+1, px, py, pz, pw-1, 4]]
                 backup=drawList
-                global gray, black, white
                 gray = (180, 180, 180)
                 black= (0, 0, 0)
                 white= (255, 255, 255)
@@ -107,8 +109,9 @@ class App:
                         pygame.draw.polygon(display_surf, black, [[c-110, d+60], [c-160, d+100], [c-160, d-100], [c-110, d-60]])
                     else:
                         pygame.draw.polygon(display_surf, gray, [[c-110, d+60], [c-160, d+100], [c-160, d-100], [c-110, d-60]])
+
                     if mazePath[drawList[1][6]][drawList[1][7]][drawList[1][8]][drawList[1][9]]==1:
-                                pygame.draw.polygon(display_surf, black, [[c-110, d+60], [c-160, d+100], [c+160, d+100], [c+110, d+60]])
+                        pygame.draw.polygon(display_surf, black, [[c-110, d+60], [c-160, d+100], [c+160, d+100], [c+110, d+60]])
                     else:
                         pygame.draw.polygon(display_surf, gray, [[c-110, d+60], [c-160, d+100], [c+160, d+100], [c+110, d+60]])
                     if mazePath[drawList[1][1]][drawList[1][2]][drawList[1][3]][drawList[1][4]]==1:
@@ -116,6 +119,7 @@ class App:
                     else:
                         pygame.draw.polygon(display_surf, gray, [[c+110, d-60], [c+160, d-100], [c-160, d-100], [c-110, d-60]])
                     drawList=backup
+
                     #십자가
                     pygame.draw.line(display_surf, white, (400,0), (400,600), 2)
                     pygame.draw.line(display_surf, white, (0,300), (800,300), 2)
@@ -123,14 +127,15 @@ class App:
                     pn_List=[[1, 1], [1, -1], [-1, 1], [-1, -1]]
                     for x, y in pn_List:
                         pygame.draw.line(display_surf, white, [a+x*110, b+y*60], [a+x*160, b+y*100], 2)
+
                 #위치 정보
                 pygame.draw.rect(display_surf, white, (310, 250, 180, 100))
                 pygame.draw.rect(display_surf, black, (312, 252, 176, 96))
                 font=pygame.font.Font(None, 40)
                 text=font.render("POSTION", True, white)
-                t=font.render((App.playerpos[0], App.playerpos[1], App.playerpos[2], App.playerpos[3]), True, white)
+                t=font.render(px, True, white)
                 display_surf.blit(text, (335, 255))
-                display_surf.blit(t, (335, 300))
+                display_surf.blit(t, (335, 265))
 
                 #좌표 평면 정보
                 i=-1
@@ -150,7 +155,8 @@ class App:
                         con.extend(dis)
                         i=0
                         pygame.display.flip()
-    
+
+
             print(f"{self.playerpos},{mazePath[self.playerpos[0]][self.playerpos[1]][self.playerpos[2]][self.playerpos[3]]}")
             # 이거는 플레이어 좌표 확인용. 나중에 가운데에 플레이어 좌표 띄우고 난 후에는 지워야함
 
