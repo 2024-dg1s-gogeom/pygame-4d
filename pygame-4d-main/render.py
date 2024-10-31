@@ -1,6 +1,6 @@
 import pygame
 from pygame.locals import *
-from map import vis
+from map import show_map
 def front_render(font, maze, display_surf):
     basicFont = pygame.font.SysFont(None, 30, False, False)
     titleFont = pygame.font.SysFont(None, 50, False, True)
@@ -26,7 +26,7 @@ def play_render(font, maze, display_surf):
     display_surf.fill((0, 0, 0))
     pygame.draw.line(display_surf, (255, 255, 255), (400,0), (400,600), 2)
     pygame.draw.line(display_surf, (255, 255, 255), (0,300), (800,300), 2)  
-    vis.show_map(display_surf)
+    show_map(display_surf)
     pygame.display.flip()
 
 def finish_render(font, maze, display_surf):
