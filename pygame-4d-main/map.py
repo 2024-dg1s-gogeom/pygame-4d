@@ -4,32 +4,36 @@ from maze.maze import Maze
 from maze.maze import mazePath
 import render
 import numpy as np
-px, py, pz, pw =0
+
 def show_map(display_surf):
     global px, py, pz, pw
-    def pos_move(self,event):
-        if event.type == pygame.KEYDOWN and self.k == 1:
-            if event.key == pygame.K_LSHIFT or event.key == pygame.K_RSHIFT:
-                self.modifier *= -1
-            if event.key == pygame.K_q:
-                px=px+1
-            if event.key == pygame.K_w: 
-                py=py+1
-            if event.key == pygame.K_e:
-                pz=pz+1
-            if event.key == pygame.K_r:
-                pw=pw+1         
-        if event.type == pygame.KEYDOWN and self.k == 1: 
-            if event.key == pygame.K_LSHIFT or event.key == pygame.K_RSHIFT:    
-                self.modifier *= -1
-            if event.key == pygame.K_q:
-                px=px-1
-            if event.key == pygame.K_w: 
-                py=py-1
-            if event.key == pygame.K_e:
-                pz=pz-1
-            if event.key == pygame.K_r:
-                pw=pw-1
+    def pos_move(self):
+        for event in pygame.event.get():
+            self.on_event(event)
+
+            if event.type == pygame.KEYDOWN and self.k == 1:
+                if event.key == pygame.K_LSHIFT or event.key == pygame.K_RSHIFT:
+                    self.modifier *= -1
+                if event.key == pygame.K_q:
+                    px=px+1
+                if event.key == pygame.K_w: 
+                    py=py+1
+                if event.key == pygame.K_e:
+                    pz=pz+1
+                if event.key == pygame.K_r:
+                    pw=pw+1         
+            if event.type == pygame.KEYDOWN and self.k == 1: 
+                if event.key == pygame.K_LSHIFT or event.key == pygame.K_RSHIFT:    
+                    self.modifier *= -1
+                if event.key == pygame.K_q:
+                    px=px-1
+                if event.key == pygame.K_w: 
+                    py=py-1
+                if event.key == pygame.K_e:
+                    pz=pz-1
+                if event.key == pygame.K_r:
+                    pw=pw-1
+
     pos_move()
     drawList = [[200, 150, px+1, py, pz, pw, px-1, py, pz, pw, 1], [600, 150, px, py+1, pz, pw, px, py-1, pz, pw, 2], [200, 450, px, py, pz+1, pw, px, py, pz-1, pw, 3], [600, 450, px, py, pz, pw+1, px, py, pz, pw-1, 4]]
     backup=drawList
