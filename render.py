@@ -34,7 +34,7 @@ def finish_render(font, maze, display_surf):
     display_surf.fill((0, 0, 0))
     ending = font.render("You WON !!", True, (255, 255, 255))
     display_surf.blit(ending, (210, 232))
-    goingback = font.render("Tap ESC to end game", True, (255, 255, 255))
+    goingback = font.render("Tap ESC to return to start", True, (255, 255, 255))
     display_surf.blit(goingback, (210, 282))
     pygame.display.flip()
 

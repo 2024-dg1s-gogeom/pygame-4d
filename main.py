@@ -1,8 +1,8 @@
 import pygame
 from pygame.locals import *
 from maze.maze import Maze
-from maze.maze import mazePath, modeOfMaze
-from maze.maze import startRmazeX, startRmazeY, startRmazeZ, startRmazeW
+from maze.maze import mazePath
+from maze.maze import startPos
 import render
 
 class App:
@@ -19,10 +19,7 @@ class App:
         self._running = True
         self.maze = Maze()
         self.k = 0
-        if modeOfMaze == 'r':
-            self.playerpos = [startRmazeX, startRmazeY, startRmazeZ, startRmazeW]
-        elif modeOfMaze == 's':
-            self.playerpos = [0,0,0,0]
+        self.playerpos = [startPos, 0, 0, 0]
         self.modifier = 1
 
     def on_event(self, event):
@@ -53,10 +50,10 @@ class App:
 
             if  ( 
                     mazePath[self.playerpos[0]][self.playerpos[1]][self.playerpos[2]][self.playerpos[3]] == 0 or # 벽 생성
-                    self.playerpos[0]<0 or self.playerpos[0]>20 or # 맵 못 빠져나가도록
-                    self.playerpos[1]<0 or self.playerpos[1]>20 or 
-                    self.playerpos[2]<0 or self.playerpos[2]>20 or 
-                    self.playerpos[3]<0 or self.playerpos[3]>20
+                    self.playerpos[0]<0 or self.playerpos[0]>19 or # 맵 못 빠져나가도록
+                    self.playerpos[1]<0 or self.playerpos[1]>19 or 
+                    self.playerpos[2]<0 or self.playerpos[2]>19 or 
+                    self.playerpos[3]<0 or self.playerpos[3]>19
                 ):
 
                 if event.type == pygame.KEYDOWN and self.k == 1: 
@@ -77,10 +74,6 @@ class App:
             ### 게임 끝 ###
             if mazePath[self.playerpos[0]][self.playerpos[1]][self.playerpos[2]][self.playerpos[3]] == 3:
                 self.k = 2
-            
-            if event.type == pygame.KEYDOWN and self.k == 2:
-                if event.key == pygame.K_ESCAPE:
-                    pygame.quit()
 
     def on_render(self):
         if self.k == 0:
@@ -90,6 +83,9 @@ class App:
         elif self.k == 2:
             render.finish_render(self.font, self.maze, self._display_surf)
 
+    def on_cleanup(self):
+        pygame.quit()
+
     def on_execute(self):
         if self.on_init() == False:
             self._running = False
@@ -97,6 +93,8 @@ class App:
         while self._running:
             self.on_render()
             self.on_loop()
+
+        self.on_cleanup()
 
 if __name__ == "__main__":
     theApp = App()
